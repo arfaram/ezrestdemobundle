@@ -8,11 +8,11 @@ eZplatform 1.7 + , symfony 2.8 +
 - Return all Contenttype content from specific path using different parameters. See *Request Parameters* and *Example* below
 
 ##Installation
-- create vendor folder inside your src folder
+- create vendor and bundle folder inside your src folder
 
-mkdir src/Ez
+mkdir -p src/Ez/RestBundle
 
-- Clone the Repo in the Ez folder
+- Clone the Repo in the RestBundle folder
 
 git clone git@bitbucket.org:Ramzi-Arfaoui/ezrestbundle.git
 
