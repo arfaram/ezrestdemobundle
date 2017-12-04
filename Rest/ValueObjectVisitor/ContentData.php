@@ -8,9 +8,14 @@ use eZ\Publish\Core\REST\Common\Output\Visitor;
 
 class ContentData extends ValueObjectVisitor
 {
+    /**
+     * @param \eZ\Publish\Core\REST\Common\Output\Visitor $visitor
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator $generator
+     * @param mixed $data
+     */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {
-        $visitor->setHeader('Content-Type', $generator->getMediaType('ContentList'));
+        $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeContentList'));
 
         if (empty($data->contents)) {
             $visitor->setStatus(204);
@@ -21,13 +26,13 @@ class ContentData extends ValueObjectVisitor
         //The render and generateElement can use compiler pass each time this class is called, only for demo purpose
         $responseData = $this->render($generator, $data);
 
-        return $responseData;
+        return;
     }
 
     /**
-     * @param Generator $generator
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator $generator
      * @param $data
-     * @return Generator
+     * @return \eZ\Publish\Core\REST\Common\Output\Generator
      */
     public function render(Generator $generator, $data)
     {
@@ -42,14 +47,14 @@ class ContentData extends ValueObjectVisitor
     }
 
     /**
-     * @param Generator $generator
+     * @param \eZ\Publish\Core\REST\Common\Output\Generator $generator
      * @param array $contentTypeItems
-     * @return Generator
+     * @return \eZ\Publish\Core\REST\Common\Output\Generator
      */
     public function generateElement(Generator $generator, array $contentTypeItems = [])
     {
         $generator->startObjectElement('contentList');
-        $generator->startList('content');
+        $generator->startList('contents');
 
         foreach ($contentTypeItems as $content) {
             $generator->startObjectElement('content');
@@ -93,7 +98,7 @@ class ContentData extends ValueObjectVisitor
             $generator->endObjectElement('content');
         }
 
-        $generator->endList('content');
+        $generator->endList('contents');
         $generator->endObjectElement('contentList');
 
         return $generator;

@@ -11,15 +11,13 @@ use eZ\Publish\API\Repository\LocationService;
 use eZ\Publish\API\Repository\SearchService;
 use eZ\Publish\API\Repository\Values\Content\Query;
 use eZ\Publish\Core\MVC\Symfony\SiteAccess;
-use eZ\Publish\Core\REST\Server\Input\Parser\Criterion\LanguageCode;
 use eZ\Publish\Core\MVC\Exception\SourceImageNotFoundException;
 
 class Content
 {
-    /**
-     * @var UrlGenerator
-     */
+    /** @var \Symfony\Component\Routing\Generator\UrlGeneratorInterface */
     protected $generator;
+
     /** @var \eZ\Publish\Core\Repository\LocationService */
     protected $locationService;
 
@@ -43,13 +41,14 @@ class Content
 
     /**
      * Content constructor.
-     * @param UrlGenerator $generator
-     * @param LocationService $locationService
-     * @param SearchService $searchService
-     * @param ContentTypeService $contentTypeService
-     * @param FieldTypeService $fieldTypeService
-     * @param RichHtml5 $richHtml5Converter
-     * @param ImageVariationService $imageVariationService
+     *
+     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $generator
+     * @param \eZ\Publish\API\Repository\LocationService $locationService
+     * @param \eZ\Publish\API\Repository\SearchService $searchService
+     * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
+     * @param \eZ\Publish\API\Repository\FieldTypeService $fieldTypeService
+     * @param \eZ\Bundle\EzPublishCoreBundle\FieldType\RichText\Converter\Html5 $richHtml5Converter
+     * @param \eZ\Bundle\EzPublishCoreBundle\Imagine\AliasGenerator $imageVariationService
      */
     public function __construct(
         UrlGenerator $generator,
@@ -78,13 +77,17 @@ class Content
     }
 
     /**
-     * @return SiteAccess
+     * @return \eZ\Publish\Core\MVC\Symfony\SiteAccess
      */
     public function getSiteAccess()
     {
         return $this->siteAccess;
     }
 
+    /**
+     * @param array $options
+     * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchHit[]
+     */
     public function getItems(array $options)
     {
         $contentTypeId = $options['contentTypeId'];
@@ -98,12 +101,15 @@ class Content
             echo 'You should specify the subtree location (Mandatory options) Trace:' . $e->getMessage();
             exit;
         }
-        if (!$options['hidden']) {
+
+        if ($options['hidden'] == 'true' || !$options['hidden']) {
             $criteria[] = new Query\Criterion\Visibility(Query\Criterion\Visibility::VISIBLE);
+        } else {
+            $criteria[] = new Query\Criterion\Visibility(Query\Criterion\Visibility::HIDDEN);
         }
 
         if ($lang = $options['lang']) {
-            $criteria[] = new LanguageCode($lang);
+            $criteria[] = new Query\Criterion\LanguageCode($lang);
         }
 
         $query = new Query();
@@ -122,10 +128,15 @@ class Content
         }
 
         $contentItems = $this->searchService->findContent($query)->searchHits;
-
+//print_r($contentItems);exit;
         return $contentItems;
     }
 
+    /**
+     * @param $items
+     * @param $options
+     * @return array|mixed
+     */
     protected function prepareContent($items, $options)
     {
         $data = array();
@@ -184,7 +195,7 @@ class Content
                             $valueHash = $this->ezrichtext($field);
                         }
                         if ($fieldDefinition->fieldTypeIdentifier == 'ezimage') {
-                            $valueHash = $this->ezimage($field, $contentValue);
+                            $valueHash = $this->ezimage($field, $contentValue, $options);
                         }
 
                         $data[$current]['fields'][$fieldDefinition->identifier] = $valueHash;
@@ -200,13 +211,12 @@ class Content
         return $data;
     }
 
-    //NEXT can be moved to custom service , only for demo purpose
+    //Below can be moved to custom service.< only for demo purpose >
 
     /**
      * Method for parsing ezrichtext field.
      *
      * @param \eZ\Publish\API\Repository\Values\Content\Field $field
-     *
      * @return string
      */
     public function ezrichtext($field)
@@ -218,13 +228,18 @@ class Content
      * Method for rendering ezimage field.
      *
      * @param \eZ\Publish\API\Repository\Values\Content\Field $field
-     *
+     * @param $content
+     * @param $options
      * @return string
      */
-    public function ezimage($field, $content)
+    public function ezimage($field, $content, $options)
     {
         try {
-            return $this->imageVariationService->getVariation($field, $content->versionInfo, 'original')->uri;
+            if (isset($options['image_variation']) && !empty($options['image_variation'])) {
+                return $this->imageVariationService->getVariation($field, $content->versionInfo, $options['image_variation'])->uri;
+            } else {
+                return $this->imageVariationService->getVariation($field, $content->versionInfo, 'original')->uri;
+            }
         } catch (SourceImageNotFoundException $exception) {
             return '';
         }

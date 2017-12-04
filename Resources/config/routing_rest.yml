@@ -1,5 +1,10 @@
-ez_rest_getContentTypeContent:
-    path: /ez_rest/contentTypeContent/{contentTypeId}
+ez_rest_getContentTypeContent_get:
+    path: /ez_rest/contentTypeContent/GET/{contentTypeId}
     defaults:
         _controller: ez_rest.controller.content:getContentTypeContent
     methods: [GET]
+ez_rest_getContentTypeContent_post:
+    path: /ez_rest/contentTypeContent/POST
+    defaults:
+        _controller: ez_rest.controller.content:getContentTypeContentPost
+    methods: [POST]

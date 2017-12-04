@@ -1,9 +1,21 @@
 parameters:
-      ez_rest.controller.content.class: Ez\RestBundle\Rest\Controller\ContentController
+      ez_rest.controller.content.class: Ez\RestBundle\Rest\Controller\ContentTypeContentListController
       ez_rest.content.content.class: Ez\RestBundle\Rest\Content\Content
       ez_rest.content.contenttype.class: Ez\RestBundle\Rest\Content\ContentType
       ez_rest.value_object_visitor.content.class: Ez\RestBundle\Rest\ValueObjectVisitor\ContentData
+      ez_rest.input_parser.contenttypecontentlist.class: Ez\RestBundle\Rest\Input\Parser\ContentTypeContentList
+      ##use service to handle post and get handler
+      ez_rest.request_data_parser.service.class: Ez\RestBundle\Rest\Repository\RequestParserService
+      ez_rest.request_data_parser.gethandler.class: Ez\RestBundle\Rest\Repository\HeaderMethodParserHandler\GetRequestDataHandler
+      ez_rest.request_data_parser.posthandler.class: Ez\RestBundle\Rest\Repository\HeaderMethodParserHandler\PostRequestDataHandler
+
 services:
+    ez_rest.controller.content:
+        class: '%ez_rest.controller.content.class%'
+        parent: ezpublish_rest.controller.base
+        arguments:
+            - '@ez_rest.content.contenttype'
+            - '@ez_rest.request_data_parser.service'
     ez_rest.content.content:
         class: '%ez_rest.content.content.class%'
         arguments:
@@ -19,13 +31,29 @@ services:
     ez_rest.content.contenttype:
         class: '%ez_rest.content.contenttype.class%'
         parent: 'ez_rest.content.content'
-    ez_rest.controller.content:
-        class: '%ez_rest.controller.content.class%'
-        arguments:
-            - '@ez_rest.content.contenttype'
+
         parent: ezpublish_rest.controller.base
     ez_rest.value_object_visitor.content:
         parent: ezpublish_rest.output.value_object_visitor.base
         class: '%ez_rest.value_object_visitor.content.class%'
         tags:
             - { name: ezpublish_rest.output.value_object_visitor, type: Ez\RestBundle\Rest\Values\ContentData }
+    ez_rest.input_parser.contenttypecontentlist:
+        parent: ezpublish_rest.input.parser
+        class: '%ez_rest.input_parser.contenttypecontentlist.class%'
+        tags:
+            - { name: ezpublish_rest.input.parser, mediaType: application/vnd.custom.ContentTypeContentList }
+    ##use service to handle post and get handler
+    ez_rest.request_data_parser.service:
+        class: '%ez_rest.request_data_parser.service.class%'
+        calls:
+            - [setSiteAccess, ['@ezpublish.siteaccess']]
+            - [setInputDispatcher, ['@ezpublish_rest.input.dispatcher']]
+    ez_rest.request_data_parser.gethandler:
+        class: '%ez_rest.request_data_parser.gethandler.class%'
+        tags:
+            - {name: ez_rest.request_data.contenttype_contentlist, alias: GET  }
+    ez_rest.request_data_parser.posthandler:
+        class: '%ez_rest.request_data_parser.posthandler.class%'
+        tags:
+            - {name: ez_rest.request_data.contenttype_contentlist, alias: POST }

@@ -4,11 +4,13 @@ namespace Ez\RestBundle\Rest\Values;
 
 class ContentData
 {
-    /** @var array */
+    /**
+     * @var
+     */
     public $contents;
 
     /**
-     * Constructs ContentData object.
+     * ContentData constructor.
      *
      * @param array $contents
      */
