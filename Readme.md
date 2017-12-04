@@ -1,4 +1,4 @@
-#EzRestBundle
+# EzRestBundle
 
 Extending the Ez Rest API - demo 
 
@@ -8,14 +8,14 @@ eZPlatform 1.7 + , symfony 2.8 +
 
 ## Use Case -Demo
 
-See presentation to understand better how to extend the ezplatform REST API:https://github.com/arfaram/ezrestdemobundle
+See presentation to understand better how to extend the ezplatform REST API:https://arfaram.github.io/slides/ezsysztems_meetup_20171130
 
 - Export all content using specific contentType ID from specific path. content fieldTypes should be specified.
 - How to use GET or POST verbs using `ValueObjectVisitor` and `InputParser`
 
  See List of required and optional parameters and examples below
  
-##Installation
+## Installation
 - create vendor and bundle folder inside your src folder
 
 ```
@@ -55,7 +55,7 @@ php app/console cache:clear
 
 ### Mandatory
 - `subtree`:  Specify the location from where content will be fetched.(default:2)
-- `fields`: ***Note: only ezstring, ezrichtext and ezimage fields are supported in this demo ***. 
+- `fields`: Only **ezstring, ezrichtext and ezimage** fields are supported in this demo. 
 
 ### Optional
 - `limit`: Number of content items to return
