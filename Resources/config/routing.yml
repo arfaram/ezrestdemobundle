@@ -1,3 +1,0 @@
-ez_rest_routes:
-    resource: "@EzRestBundle/Resources/config/routing_rest.yml"
-    prefix: '%ezpublish_rest.path_prefix%'

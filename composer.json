@@ -1,0 +1,24 @@
+{
+  "name": "arfaram/RestDemoBundle",
+  "target-dir": "arfaram/RestDemoBundle",
+  "type": "application",
+  "description": "Extending the eZPlatform API Demo",
+  "keywords": ["ezplatform"],
+  "homepage": "https://github.com/arfaram/ezrestdemobundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ramzi Arfaoui",
+      "email": "ramzi_arfa@hotmail.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Ez\\RestDemoBundle\\": "bundle",
+      "Ez\\RestDemo\\": "lib/core"
+    }
+  },
+  "require": {
+    "ezsystems/ezpublish-kernel": "^6.8"
+  }
+}
