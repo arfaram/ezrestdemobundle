@@ -1,6 +1,6 @@
 {
-  "name": "arfaram/RestDemoBundle",
-  "target-dir": "arfaram/RestDemoBundle",
+  "name": "arfaram/ezrestdemobundle",
+  "target-dir": "Ez/RestDemoBundle",
   "type": "application",
   "description": "Extending the eZPlatform API Demo",
   "keywords": ["ezplatform"],
