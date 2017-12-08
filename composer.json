@@ -17,8 +17,5 @@
       "Ez\\RestDemoBundle\\": "bundle",
       "Ez\\RestDemo\\": "lib/core"
     }
-  },
-  "require": {
-    "ezsystems/ezpublish-kernel": "^6.9"
   }
 }
