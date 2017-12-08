@@ -19,6 +19,6 @@
     }
   },
   "require": {
-    "ezsystems/ezpublish-kernel": "^6.8"
+    "ezsystems/ezpublish-kernel": "^6.9"
   }
 }
