@@ -1,10 +1,10 @@
 <?php
 
-namespace Ez\RestDemo\Rest\Controller;
+namespace Ez\RestDemoBundle\Controller;
 
 use eZ\Publish\Core\REST\Server\Controller as BaseController;
 use eZ\Publish\Core\REST\Server\Values\CachedValue;
-use Ez\RestDemo\Rest\Content\ContentType;
+use Ez\RestDemoBundle\Content\ContentType;
 use Ez\RestDemo\Rest\Repository\RequestParserService;
 use Ez\RestDemo\Rest\Values\ContentData as ContentDataValue;
 use Symfony\Component\HttpFoundation\Request;

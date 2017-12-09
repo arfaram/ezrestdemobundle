@@ -1,7 +1,7 @@
 parameters:
-      ez_rest.controller.content.class: Ez\RestDemo\Rest\Controller\ContentTypeContentListController
-      ez_rest.content.content.class: Ez\RestDemo\Rest\Content\Content
-      ez_rest.content.contenttype.class: Ez\RestDemo\Rest\Content\ContentType
+      ez_rest.controller.content.class: Ez\RestDemoBundle\Controller\ContentTypeContentListController
+      ez_rest.content.content.class: Ez\RestDemoBundle\Content\Content
+      ez_rest.content.contenttype.class: Ez\RestDemoBundle\Content\ContentType
       ez_rest.value_object_visitor.content.class: Ez\RestDemo\Rest\ValueObjectVisitor\ContentData
       ez_rest.input_parser.contenttypecontentlist.class: Ez\RestDemo\Rest\Input\Parser\ContentTypeContentList
       ##use service to handle post and get handler
@@ -31,8 +31,7 @@ services:
     ez_rest.content.contenttype:
         class: '%ez_rest.content.contenttype.class%'
         parent: 'ez_rest.content.content'
-
-        parent: ezpublish_rest.controller.base
+        #parent: ezpublish_rest.controller.base
     ez_rest.value_object_visitor.content:
         parent: ezpublish_rest.output.value_object_visitor.base
         class: '%ez_rest.value_object_visitor.content.class%'

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ez\RestDemo\Rest\Content;
+namespace Ez\RestDemoBundle\Content;
 
 class ContentType extends Content
 {

@@ -55,14 +55,14 @@ php app/console cache:clear
 - `limit`: Number of content items to return
 - `sort`: ContentName sorting. Possible values: `ASC` or `DESC`. (default:*ASC*) 
 - `lang`: Content Language (e.g. `ger-DE`)
-- `hidden`: `true` or `false` fetch visible or hidden content. (default:*true* )
+- `hidden`: `true` or `false` fetch visible or hidden content. (default:*false* )
 - `image_variation`: (default:*original*)
 
 ## GET Example
 
 ```
 Method: GET
-Host:http://wwww.domain.com/api/ezp/v2/ez_rest/contentTypeContent/GET/48?&limit=2&subtree=99&fields=title,summary,description,main_image&sort=DESC&lang=ger-DE&image_variation=small&hidden=true
+Host:http://wwww.domain.com/api/ezp/v2/ez_rest/contentTypeContent/GET/48?&limit=2&subtree=99&fields=title,summary,description,main_image&sort=DESC&lang=ger-DE&image_variation=small&hidden=false
 
 Accept:application/xml
 ```
@@ -87,7 +87,7 @@ XML payload
     <limit>2</limit>
     <subtree>109</subtree>
     <sort>DESC</sort>
-    <hidden>true</hidden>
+    <hidden>false</hidden>
     <lang>ger-DE</lang>
     <image_variation>small</image_variation>
     <fields>

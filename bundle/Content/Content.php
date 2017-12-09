@@ -1,6 +1,6 @@
 <?php
 
-namespace Ez\RestDemo\Rest\Content;
+namespace Ez\RestDemoBundle\Content;
 
 use eZ\Bundle\EzPublishCoreBundle\FieldType\RichText\Converter\Html5 as RichHtml5;
 use eZ\Bundle\EzPublishCoreBundle\Imagine\AliasGenerator as ImageVariationService;
@@ -102,7 +102,7 @@ class Content
             exit;
         }
 
-        if ($options['hidden'] == 'true' || !$options['hidden']) {
+        if ($options['hidden'] == 'false' || !$options['hidden']) {
             $criteria[] = new Query\Criterion\Visibility(Query\Criterion\Visibility::VISIBLE);
         } else {
             $criteria[] = new Query\Criterion\Visibility(Query\Criterion\Visibility::HIDDEN);
