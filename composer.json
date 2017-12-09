@@ -17,7 +17,7 @@
   "autoload": {
     "psr-4": {
       "Ez\\RestDemoBundle\\": "bundle",
-      "Ez\\RestDemo\\": "lib/core"
+      "Ez\\RestDemo\\": "lib/Core"
     }
   }
 }
