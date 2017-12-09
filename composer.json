@@ -11,9 +11,6 @@
       "email": "ramzi_arfa@hotmail.de"
     }
   ],
-  "require": {
-    "ezsystems/ezpublish-kernel": "~6.8"
-  },
   "autoload": {
     "psr-4": {
       "Ez\\RestDemoBundle\\": "bundle",
