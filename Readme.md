@@ -16,17 +16,11 @@ See presentation to understand better how to extend the ezplatform REST API:http
  See List of required and optional parameters and examples below
  
 ## Installation
-- create vendor and bundle folder inside your src folder
 
 ```
-mkdir -p src/Ez/RestBundle
+composer require arfaram/ezrestdemobundle:^1.0
 ```
 
-- Clone the Repo in the RestBundle folder
-
-```
-git clone https://github.com/arfaram/ezrestdemobundle.git
-```
 - Activate the Bundle in AppKernel.php
 
 ```
