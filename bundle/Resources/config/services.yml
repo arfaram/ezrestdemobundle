@@ -27,7 +27,7 @@ services:
             - '@ezpublish.fieldtype.ezrichtext.converter.output.xhtml5.core'
             - '@ezpublish.image_alias.imagine.alias_generator'
         calls:
-            - [setSiteAccess, [@ezpublish.siteaccess]]
+            - [setSiteAccess, ['@ezpublish.siteaccess']]
     ez_rest.content.contenttype:
         class: '%ez_rest.content.contenttype.class%'
         parent: 'ez_rest.content.content'
