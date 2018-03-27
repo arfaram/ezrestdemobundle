@@ -9,6 +9,14 @@ parameters:
       ez_rest.request_data_parser.gethandler.class: Ez\RestDemo\Rest\Repository\HeaderMethodParserHandler\GetRequestDataHandler
       ez_rest.request_data_parser.posthandler.class: Ez\RestDemo\Rest\Repository\HeaderMethodParserHandler\PostRequestDataHandler
 
+      ez_rest.controller.content_create.class: Ez\RestDemoBundle\Controller\CreateContentController
+      ez_rest.content_create.service.class: Ez\RestDemoBundle\CreateContentServices\CreateContent
+      ez_rest.content_create.rest_client.class: Ez\RestDemoBundle\CreateContentServices\RestClient
+      ez_rest.content_create.parser.class: Ez\RestDemoBundle\CreateContentServices\Parser
+      ez_rest.content_create.guzzle_http_client.class: GuzzleHttp\Client
+      ez_rest.content_create.cookieJar.class: GuzzleHttp\Cookie\CookieJar
+      ez_rest.content_create.host: 'http://cologne.tripandtravel.local'
+
 services:
     ez_rest.controller.content:
         class: '%ez_rest.controller.content.class%'
@@ -56,3 +64,30 @@ services:
         class: '%ez_rest.request_data_parser.posthandler.class%'
         tags:
             - {name: ez_rest.request_data.contenttype_contentlist, alias: POST }
+
+    #Create Content
+    ez_rest.controller.content_create:
+        class: '%ez_rest.controller.content_create.class%'
+        parent: ezpublish_rest.controller.base
+        arguments:
+            - '@ez_rest.content_create.service'
+
+    ez_rest.content_create.service:
+        class: '%ez_rest.content_create.service.class%'
+        arguments:
+            - '@ez_rest.content_create.rest_client'
+
+    ez_rest.content_create.guzzle_http_client:
+        class: '%ez_rest.content_create.guzzle_http_client.class%'
+
+    ez_rest.content_create.cookieJar:
+        class: '%ez_rest.content_create.cookieJar.class%'
+
+    ez_rest.content_create.rest_client:
+        class: '%ez_rest.content_create.rest_client.class%'
+        arguments:
+            - '@ez_rest.content_create.guzzle_http_client'
+            - '@ez_rest.content_create.cookieJar'
+        calls:
+            - [setHttpHost, ['%ez_rest.content_create.host%']]
+

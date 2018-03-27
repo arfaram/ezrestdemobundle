@@ -82,4 +82,5 @@ class ContentTypeContentListController extends BaseController
 
         return new ContentDataValue($data, $options);
     }
+
 }

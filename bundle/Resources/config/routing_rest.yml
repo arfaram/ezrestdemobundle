@@ -8,3 +8,9 @@ ez_rest_getContentTypeContent_post:
     defaults:
         _controller: ez_rest.controller.content:getContentTypeContentPost
     methods: [POST]
+
+ez_rest_createContent:
+    path: /ez_rest/create/content
+    defaults:
+        _controller: ez_rest.controller.content_create:createContent
+    methods: [POST]
