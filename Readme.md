@@ -28,14 +28,14 @@ composer require arfaram/ezrestdemobundle:^1.0
     {
         $bundles = array(
             //...
-            new Ez\RestBundle\EzRestBundle(),
+            new Ez\RestDemoBundle\EzRestDemoBundle(),
 
 ```
 
 - Add the bundle routing in routing.yml
 ```
 ez_rest:
-    resource: "@EzRestBundle/Resources/config/routing.yml"
+    resource: "@EzRestDemoBundle/Resources/config/routing.yml"
     prefix:   /
 ```
 
