@@ -2,8 +2,8 @@
 
 namespace Ez\RestDemoBundle\Content;
 
-use eZ\Bundle\EzPublishCoreBundle\FieldType\RichText\Converter\Html5 as RichHtml5;
-use eZ\Bundle\EzPublishCoreBundle\Imagine\AliasGenerator as ImageVariationService;
+use EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5 as RichHtml5;
+use eZ\Bundle\EzPublishCoreBundle\Imagine\ImageAsset\AliasGenerator as ImageVariationService;
 use eZ\Publish\API\Repository\ContentTypeService;
 use eZ\Publish\API\Repository\FieldTypeService;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface as UrlGenerator;
@@ -47,8 +47,8 @@ class Content
      * @param \eZ\Publish\API\Repository\SearchService $searchService
      * @param \eZ\Publish\API\Repository\ContentTypeService $contentTypeService
      * @param \eZ\Publish\API\Repository\FieldTypeService $fieldTypeService
-     * @param \eZ\Bundle\EzPublishCoreBundle\FieldType\RichText\Converter\Html5 $richHtml5Converter
-     * @param \eZ\Bundle\EzPublishCoreBundle\Imagine\AliasGenerator $imageVariationService
+     * @param \EzSystems\EzPlatformRichTextBundle\eZ\RichText\Converter\Html5 $richHtml5Converter
+     * @param \eZ\Bundle\EzPublishCoreBundle\Imagine\ImageAsset\AliasGenerator $imageVariationService
      */
     public function __construct(
         UrlGenerator $generator,
